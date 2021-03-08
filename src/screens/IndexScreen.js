@@ -21,7 +21,9 @@ const IndexScreen = ({ navigation }) => {
         keyExtractor={(blogPost) => blogPost.title}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate("Show", { id: item.id })}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Show", { id: item.id })}
+            >
               <View style={styles.row}>
                 <Text style={styles.title}>
                   {item.title} - ID {item.id}
@@ -38,6 +40,16 @@ const IndexScreen = ({ navigation }) => {
   );
 };
 
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: () => (
+      <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+        <EvilIcons style={styles.create} name="plus" size={28} color="black" />
+      </TouchableOpacity>
+    ),
+  };
+};
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
@@ -52,17 +64,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   icon: {
-    fontSize: 24,
+    fontSize: 28,
+  },
+  create: {
+    marginRight: 20,
   },
 });
 
 export default IndexScreen;
-
-
-// return {
-//   headerRight: () => (
-//     <TouchableOpacity onPress={() => navigation.navigate('Create')}>
-//       <Feather name="plus" size={30} />
-//     </TouchableOpacity>
-//   ),
-// };
